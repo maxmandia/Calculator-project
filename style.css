@@ -1,0 +1,45 @@
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 75px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 100px;
+  background-color: grey;
+  margin-left: 250px;
+  margin-right: 250px;
+  padding: 50px;
+
+  border-radius: 20px;
+}
+
+data {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.clear-btn {
+  margin-top: 20px;
+}
+
+.row-one,
+.row-two,
+.row-three,
+.row-four {
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+}
+
+.row-one {
+  margin-top: 20px;
+}
