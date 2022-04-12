@@ -1,54 +1,86 @@
 // Query the DOM elements
 const numbers = document.querySelectorAll(".number");
 const display = document.querySelector(".display");
+const calcFunctions = document.querySelectorAll(".function");
+const compute = document.querySelector(".compute");
+const clear = document.querySelector(".clear-btn");
 
 // Mathmatical Functions
-function addition() {
-  let a = 1;
-  let b = 2;
+function addition(a, b) {
   return a + b;
 }
 
-function divide() {
-  let a = "";
-  let b = "";
+let divide = function (a, b) {
   return a / b;
-}
+};
 
-function multiply() {
-  let a = "";
-  let b = "";
+function multiply(a, b) {
   return a * b;
 }
 
-function subtract() {
-  let a = "";
-  let b = "";
+function subtract(a, b) {
   return a - b;
 }
 
-// function thats calls operator functions
-function operate(input, a, b) {
-  if (input() == addition(a, b)) {
-    return addition();
-  } else if (input() == divide(a, b)) {
-    return divide();
-  } else if (input() == multiply(a, b)) {
-    return multiply();
-  } else if (input() == subtract(a, b)) {
-    return subtract();
-  }
-}
+// Array that displays all numbers
+let displayValue = [];
 
-// main array that holds all numbers
-let numberArray = [];
+//Array that holds numbers for computation
+let calculateValue = [];
 
 // Running the forEach function on the number buttons
 numbers.forEach(function (number) {
   number.addEventListener("click", function input(e) {
-    let clickNumber = e.currentTarget.textContent;
-    numberArray.push(clickNumber);
+    // for displayValue array
+    let clickNumberDisplay = e.currentTarget.textContent;
+    displayValue.push(clickNumberDisplay);
+    display.innerHTML = `${displayValue.join("")}`;
 
-    display.innerHTML = `${numberArray.join("")}`;
+    // for calculateValue array A
+    let clickNumberCalculate = e.currentTarget.textContent;
+    calculateValue.push(clickNumberCalculate);
+
+    console.log(calculateValue);
+
+    // Running the forEach function on the number buttons
+    calcFunctions.forEach(function (calcFunction) {
+      calcFunction.addEventListener("click", function (e) {
+        let clickFunction = e.currentTarget.textContent;
+
+        if (clickFunction == "Divide") {
+          displayValue.push("/");
+          display.innerHTML = `${displayValue.join("")}`;
+        } else if (clickFunction == "Add") {
+          displayValue.push("+");
+          display.innerHTML = `${displayValue.join("")}`;
+        } else if (clickFunction == "Subtract") {
+          displayValue.push("-");
+          display.innerHTML = `${displayValue.join("")}`;
+        } else if (clickFunction == "Multiply") {
+          displayValue.push("*");
+          display.innerHTML = `${displayValue.join("")}`;
+        }
+      });
+    });
+
+    compute.addEventListener("click", function () {
+      let a = calculateValue[0];
+      let b = calculateValue[1];
+      if (displayValue.includes("/")) {
+        display.innerHTML = `${divide(a, b)}`;
+      } else if (displayValue.includes("*")) {
+        display.innerHTML = `${multiply(a, b)}`;
+      } else if (displayValue.includes("+")) {
+        display.innerHTML = `${addition(a, b)}`;
+      } else if (displayValue.includes("-")) {
+        display.innerHTML = `${subtract(a, b)}`;
+      }
+    });
+
+    clear.addEventListener("click", function (calculateValue, displayValue) {
+      display.innerHTML = ``;
+    });
   });
 });
+
+// function thats calls operator functions
